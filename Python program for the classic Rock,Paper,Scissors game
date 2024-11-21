@@ -1,0 +1,53 @@
+import random
+
+def get_computer_choice():
+    return random.choice(["rock", "paper", "scissors"])
+
+def determine_winner(player, computer):
+    if player == computer:
+        return "draw"
+    elif (player == "rock" and computer == "scissors") or \
+            (player == "paper" and computer == "rock") or \
+            (player == "scissors" and computer == "paper"):
+        return "player"
+    else:
+        return "computer"
+
+def main():
+    print("Welcome to Rock, Paper, Scissors!")
+    print("Type 'rock', 'paper', or 'scissors' to play.")
+    print("Type 'quit' to end the game.")
+
+    wins, losses, draws = 0, 0, 0
+
+    while True:
+        player_choice = input("\nYour choice: ").lower()
+        if player_choice == "quit":
+            break
+
+        if player_choice not in ["rock", "paper", "scissors"]:
+            print("Invalid choice. Please choose 'rock', 'paper', or 'scissors'.")
+            continue
+
+        computer_choice = get_computer_choice()
+        print(f"Computer chose: {computer_choice}")
+
+        result = determine_winner(player_choice, computer_choice)
+        if result == "player":
+            print("You win!")
+            wins += 1
+        elif result == "computer":
+            print("Computer wins!")
+            losses += 1
+        else:
+            print("It's a draw!")
+            draws += 1
+
+    print("\n--- Final Results ---")
+    print(f"You won {wins} times.")
+    print(f"The computer won {losses} times.")
+    print(f"There were {draws} draws.")
+    print("Thanks for playing!")
+
+if _name_ == "_main_":
+    main()
